@@ -180,21 +180,21 @@ def print_banner(text: str) -> None:
 def run_evaluation() -> None:
     print_banner("Adaptive Context Compression — V1 Evaluation")
 
-    print(f"\n📄 Document length : {len(SAMPLE_DOCUMENT):,} characters")
-    print(f"🔍 Query           : {SAMPLE_QUERY!r}\n")
+    print(f"\nDocument length : {len(SAMPLE_DOCUMENT):,} characters")
+    print(f"Query           : {SAMPLE_QUERY!r}\n")
 
     # --- initialise (loads embedding model, may take a few seconds) ---
-    print("⏳ Initialising pipeline (loading embedding model)...")
+    print("Initialising pipeline (loading embedding model)...")
     t0 = time.perf_counter()
     compressor = ContextCompressor(
         max_tokens=1500,
         groq_api_key=os.environ.get("GROQ_API_KEY"),
     )
     init_time = time.perf_counter() - t0
-    print(f"   ✅ Ready in {init_time:.1f}s\n")
+    print(f"Ready in {init_time:.1f}s\n")
 
     # --- compress ---
-    print("⏳ Compressing...")
+    print("Compressing...")
     t0 = time.perf_counter()
     result = compressor.compress(document=SAMPLE_DOCUMENT, query=SAMPLE_QUERY)
     compress_time = time.perf_counter() - t0
@@ -215,7 +215,7 @@ def run_evaluation() -> None:
     if len(result.compressed_text) > 2000:
         print(f"\n  ... [{len(result.compressed_text) - 2000} more chars]")
 
-    print_banner("Done ✅")
+    print_banner("Done")
 
 
 if __name__ == "__main__":
